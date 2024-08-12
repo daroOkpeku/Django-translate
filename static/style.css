@@ -1,0 +1,15 @@
+body{
+    box-sizing: border-box;
+    padding: 0%; 
+    margin:0%;
+}
+
+@keyframes yourAnimationName {
+    /* Animation code here */
+}
+
+/* Example */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
