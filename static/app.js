@@ -1,6 +1,6 @@
 let buger = document.getElementById("buger")
 let listx =document.getElementById('list')
-console.log(buger)
+// https://www.flaticon.com/search?word=send
 buger.addEventListener("click", function(e){
    if(listx.style.display === 'block'){
     listx.style.display = 'none';

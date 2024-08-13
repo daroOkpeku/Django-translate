@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+</head>
+<body>
+    <div class="w-full flex flex-col items-center">
+         <section class="w-10/12 sm:w-1/2 md:w-1/3 lg:w-1/5 m-auto  mt-10">
+            <img src="{% static 'img/online-shopping.png' %}" class="w-full h-full" />
+         </section>
+         <section class="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/5 flex flex-col items-center  m-auto gap-2 mt-2">
+            <span class="w-full text-base text-black text-center capitalize">welcome to translate web app</span>
+          <button class="w-full rounded-md py-2 bg-red-400 text-white">Click here</button>
+         </section>
+    </div>
+</body>
+</html>
