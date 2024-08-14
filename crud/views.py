@@ -45,7 +45,7 @@ def register(request):
         #    originurl = #from the frontend
            query = User(fullname=fullname, email=email, code=randomcode, password=password)
            query.save()
-           send_welcome_email(firstname, email, originurl)
+        #    send_welcome_email(firstname, email, originurl)
            return JsonResponse({'data':'successful registered your account'})
         else:
             return JsonResponse({"error": "failed"})
