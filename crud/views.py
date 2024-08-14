@@ -28,12 +28,15 @@ def signup(request):
     return render(request, "signup.html")
 
 def validateaccout(request, code, email):
-    return render(request, "confirm.html")
-    # user = User.objects.filter(email=email, code=code).first()
-    # if user:
-    #     return render(request, "confirm.html")
-    # else:
-    #     return render(request, "error.html")
+
+    user = User.objects.filter(email=email, code=code).first()
+   
+    if user and  (user.status == 0 or user.status is None):
+        user.status = 1
+        user.save()
+        return render(request, "confirm.html")
+    else:
+        return render(request, "error.html")
     
 
 def register(request):
@@ -53,7 +56,7 @@ def register(request):
            originurl = data['origin']
            query = User(fullname=fullname, email=email, code=randomcode, password=password)
            query.save()
-           send_welcome_email(fullname, email, originurl, randomcode, email )
+           send_welcome_email(fullname, email, originurl, randomcode)
            return JsonResponse({'data':'successful registered your account'})
         else:
             return JsonResponse({"error": "failed"})

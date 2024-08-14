@@ -7,6 +7,9 @@ let email = document.querySelector(".email")
 let password = document.querySelector(".password")
 let confirm_password = document.querySelector(".confirm_password")
 let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+let containercover = document.querySelector(".containercover")
+let contenttext = document.querySelector(".contenttext")
+
 let origin = window.location.origin
 submit.addEventListener("click", function(e){
     e.preventDefault();
@@ -30,10 +33,13 @@ submit.addEventListener("click", function(e){
     )
     .then((response) => {
     
-    console.log(response)
-    if(response.data.data){
-        containercover.style.display = "flex"
-        contenttext.textContent = rresponse.data.data
+    console.log(response.data)
+    if(response.status == 200){
+      popup.style.display = "flex"
+      popcontent.textContent = response.data.data
+    }else{
+      popup.style.display = "flex"
+      popcontent.textContent = "this email has been used before or you input is wrong"
     }
     })
     .catch((error) => {

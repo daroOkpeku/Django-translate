@@ -1,7 +1,7 @@
 from django.core.mail import EmailMultiAlternatives
 
 
-def send_welcome_email(firstname, email, origin, code, email):
+def send_welcome_email(firstname, email, origin, code):
     subject = 'Welcome to Our Site'
     from_email = 'okpekuighodaro@gmail.com'
     to = [email]
@@ -11,7 +11,7 @@ def send_welcome_email(firstname, email, origin, code, email):
     <html>
     <body>
         <p>Hi {firstname},</p>
-        <p>please <a href='{origin}/{code}/{email}'>click</a> here to confirm your  </p>
+        <p>please <a href='{origin}/confirm/{code}/{email}'>click</a> here to confirm your  </p>
         <p>Best regards,<br>Your Site Team</p>
     </body>
     </html>
