@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <title>Document</title>
    {% load static %}
    <script src="https://cdn.tailwindcss.com"></script>
    <link rel="stylesheet" href="{% static 'style.css' %}" />
    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css" integrity="sha512-B46MVOJpI6RBsdcU307elYeStF2JKT87SsHZfRSkjVi4/iZ3912zXi45X5/CBr/GbCyLx6M1GQtTKYRd52Jxgw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
 </head>
 <body>
   <section class="w-full relative ">
@@ -23,32 +25,44 @@
         <article class="w-10/12 flex flex-row items-center  justify-between  m-auto py-2 rounded-full bg-gray-200 px-2 ">
             <div class="w-11/12  ">
                 <section class="w-full">
-                    <input type="text" class="w-full py-1 outline-none px-2 bg-gray-200" />
+                    <input type="text" class="w-full py-1 outline-none px-2 bg-gray-200 word" />
                 </section>
               </div>
-              <div class="w-10">
-                <img src="{% static 'img/send.png' %}" />
+              <div class="w-10 submit">
+                <img class="submit" src="{% static 'img/send.png' %}" />
               </div>
         </article>
-      <div  class="w-full  flex flex-col gap-2 items-center justify-items-center  sm:flex sm:flex-row sm:items-center sm:justify-items-center md:block  lg:flex lg:items-center ">
+      <div  class="w-full  flex flex-col gap-2 items-center justify-between text-xs  sm:flex sm:flex-row sm:text-xs sm:items-center sm:justify-between md:block  lg:flex lg:items-center ">
         <article class="flex flex-row float-left  items-center justify-items-center w-3/4  sm:flex sm:flex-row sm:m-auto sm:w-3/5  sm:items-center sm:justify-items-center md:gap-2 md:w-1/3 md:float-left md:flex md:flex-col md:items-center md:justify-items-center lg:w-3/4 lg:flex lg:flex-row lg:items-center lg:justify-items-center   m-auto py-2 space-x-2">
             <span class="w-1/3 flex flex-row items-center ">
               <h2 class="capitalize text-sm font-medium text-red-400 ">From:</h2>
-              <select class="outline-none">
-                <option>English (en)</option>
-                <option>Chinese (zn)</option>
+              <select class="outline-none from">
+               
               </select>
             </span>
 
-            <span class="w-1/6 flex flex-row items-center ">
+            <span class="w-1/3 flex flex-row items-center ">
                 <h2 class="capitalize text-sm font-medium text-red-400">To:</h2>
-                <select class="outline-none">
-                    <option>English (en)</option>
-                    <option>Chinese (zn)</option>
+                <select class="outline-none to">
+                 
                   </select>
               </span>
         </article>
       </div>
+      <!-- style="display:none;" -->
+      <div style="display:none;"   class="w-full  flex flex-col gap-2 items-center justify-between text-xs  sm:flex sm:flex-col sm:text-xs sm:items-center sm:justify-between md:flex md:flex-col md:items-center  lg:flex lg:flex-col lg:items-center containercover">
+        <article  class="flex flex-row float-left  items-center justify-items-center w-1/2 text-sm  sm:flex sm:flex-row sm:m-auto sm:w-1/2  sm:items-center sm:justify-items-center sm:text-sm md:gap-2 md:w-1/3 md:float-left md:flex md:flex-col md:items-center md:justify-items-center md:text-base lg:w-3/4 lg:flex lg:flex-row lg:items-center lg:justify-items-center lg:text-lg   m-auto py-2 space-x-2  px-2 py-2 h-32 overflow-y-scroll contenttext">
+
+        <!-- efjhfjjfdjhfjkfjkfjkfjkkfs ksjkfsjkfjk -->
+        </article>
+        <article class="flex flex-row float-left  items-center justify-items-center w-1/2  sm:flex sm:flex-row sm:m-auto sm:w-1/2  sm:items-center sm:justify-items-center md:gap-2 md:w-1/3 md:float-left md:flex md:flex-col md:items-center md:justify-items-center lg:w-3/4 lg:flex lg:flex-row lg:items-center lg:justify-items-center   m-auto py-2 space-x-2   ">
+          <button class="w-10 h-10 border rounded-full m-auto px-1 py-1 speaktransalte">
+            <img class="w-full h-full" src="{% static 'img/megaphone.png' %}" />
+          </button>
+        </article>
+      </div>
+
+
       </section>
 
      </section>
@@ -57,6 +71,22 @@
      </section>
     </div>
   </section>
+
+  <article style="display:none;" class="w-full top-0 left-0 right-0 bottom-0 z-50 fixed bg-cover bg-black bg-opacity-10  backdrop-blur-[2px] flex flex-row items-center justify-center popup">
+
+    <section class='bg-white rounded-md w-10/12 sm:w-3/5 md:w-1/2 lg:w-2/5 mt-10 flex flex-col items-center gap-4 py-4'>
+
+  
+      <article class='w-full flex flex-col items-center justify-center gap-3'>
+          <span class='w-3/4 text-center text-sm sm:text-base md:text-2xl lg:text-2xl font-semibold capitalize popcontent'></span>
+
+          <button class='bg-red-400 text-white w-1/3 m-auto rounded-md py-1 capitalize rounded-md border close'>close</button>
+      </article>
+        
+      </section>
+
+  </article>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{% static 'app.js' %}?v={{ STATIC_VERSION }}"></script>
 </html>
