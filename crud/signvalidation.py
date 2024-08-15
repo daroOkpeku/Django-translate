@@ -7,6 +7,11 @@ def check_if_email_exist(value):
      else:
          return value
      
+def check_if_email_exist_login(value):
+     if User.objects.filter(email=value).exists():
+         raise value
+ 
+     
 
 def remove_special_characters(value):
     cleaned_value = re.sub(r'[^A-Za-z0-9 ]+', '', value)
@@ -24,6 +29,7 @@ def validate_password(value):
 
 class signcheck(forms.Form):
     fullname:forms.CharField(max_length=255, validators=[remove_special_characters])
+    username:forms.CharField(max_length=255, validators=[remove_special_characters])
     email:forms.CharField(max_length=255, validators=[check_if_email_exist])
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
@@ -32,3 +38,9 @@ class signcheck(forms.Form):
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
+    
+    
+    
+class logincheck(forms.Form):
+    email:forms.CharField(max_length=255, validators=[check_if_email_exist_login])
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), validators=[validate_password])

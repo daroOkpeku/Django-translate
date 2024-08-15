@@ -5,6 +5,7 @@ let submit = document.querySelector(".submit")
 let fullname = document.querySelector(".fullname")
 let email = document.querySelector(".email")
 let password = document.querySelector(".password")
+let username = document.querySelector(".username")
 let confirm_password = document.querySelector(".confirm_password")
 let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 let containercover = document.querySelector(".containercover")
@@ -22,6 +23,7 @@ submit.addEventListener("click", function(e){
     formdata.append("email",   email.value);
     formdata.append("password", password.value);
     formdata.append("confirm_password", confirm_password.value);
+    formdata.append("username", username.value)
     formdata.append("origin", origin);
     axios.post(
         `${origin}/register`,
