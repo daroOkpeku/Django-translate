@@ -215,9 +215,7 @@ def my_view(request):
      
      
 def createauthuser(request):
-    # if register.method == "POST":
-    #     data = json.loads(request.body.decode("utf-8"))
-    #     form = unauthuer(data)
+
         userip = my_view(request)
         userauth = Authuser.objects.filter(ip=userip).first()
 
@@ -236,6 +234,3 @@ def createauthuser(request):
             return JsonResponse({'success': "successful"})
 
 
-        # if
-    # else:
-    #     return JsonResponse({"error":"something went wrong"})
