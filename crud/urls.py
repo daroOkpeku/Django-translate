@@ -12,5 +12,9 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("signin", views.signin, name="signin"),
     path("home",  login_required(views.homeview), name="home"),
-    # path("checkauth", views.checkauth, name="checkauth")
+    path("checkauth", views.checkauth, name="checkauth"),
+    path("logout", views.logout, name="logout"),
+    path("trash", views.trash, name="trash"),
+    path("createtranword", views.createtranword, name="createtranword"),
+    path("createauthuser", views.createauthuser, name="createauthuser")
 ]

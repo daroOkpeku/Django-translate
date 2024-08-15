@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'crud.middleware.GetUserIPMiddleware'
 ]
 
 ROOT_URLCONF = 'my_app.urls'
@@ -94,6 +95,9 @@ DATABASES = {
         'PASSWORD': '',
         'HOST':'127.0.0.1',
         'PORT':'3306',
+         'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'",
+        },
     }
 }
 

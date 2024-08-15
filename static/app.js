@@ -1,5 +1,4 @@
 let buger = document.getElementById("buger")
-console.log(buger)
 let listx =document.getElementById('list')
 let word = document.querySelector(".word")
 let submit = document.querySelector(".submit")
@@ -12,7 +11,8 @@ let speaktransalte = document.querySelector(".speaktransalte")
 let closex = document.querySelector(".close")
 let popup = document.querySelector(".popup")
 let popcontent = document.querySelector(".popcontent")
-console.log(submit)
+let origin = window.location.origin
+
 // https://www.flaticon.com/search?word=send
 
 
@@ -148,25 +148,105 @@ submit.addEventListener("click", function(e){
 
 if(text && tox && fromx){
    axios.get(
-      `https://api.mymemory.translated.net/get?q=${text}&langpair=${dataInfofrom}|${dataInfo}&key=49bada96bc7f6feeaef4`,
+      `${origin}/checkauth`,
     {headers: {
+         "X-CSRFToken": csrfToken,
         "Content-Type": "application/json",
       },}
   )
   .then((response) => {
-      
-   //  console.log("Success:", response.data.responseData.translatedText);
-    console.log("Success:", response);
-    if(response.data.responseData.translatedText){
-      containercover.style.display = "flex"
-      containercover.style.flexDirection ="column"
-      contenttext.textContent = response.data.responseData.translatedText
-    }
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+   if(response.data.success && Object.keys(response.data.success).length > 0){
 
+      axios.get(
+         `https://api.mymemory.translated.net/get?q=${text}&langpair=${dataInfofrom}|${dataInfo}&key=49bada96bc7f6feeaef4`,
+       {headers: {
+           "Content-Type": "application/json",
+         },}
+     )
+     .then((response) => {
+         
+      //  console.log("Success:", response.data.responseData.translatedText);
+       console.log("Success:", response);
+       if(response.data.responseData.translatedText){
+         containercover.style.display = "flex"
+         containercover.style.flexDirection ="column"
+         contenttext.textContent = response.data.responseData.translatedText
+       
+      let formData = new FormData();
+      formData.append("fromx", dataInfofrom)
+      formData.append("to", dataInfo)
+      formData.append("tranword", response.data.responseData.translatedText)
+      formData.append("originword", text)
+        axios.post(
+        `${origin}/createtranword`,
+        formData,
+      {headers: {
+        "X-CSRFToken":csrfToken,
+          "Content-Type": "application/json",
+        },}
+    )
+    .then((response) => {
+          if(response.data.success){
+            popup.style.display = "flex"
+            popcontent.textContent = response.data.success
+           
+          }else{
+            popup.style.display = "flex"
+            popcontent.textContent = response.data.error
+          }
+    })
+
+   
+       }
+     })
+     .catch((error) => {
+       console.error("Error:", error);
+     });
+   //  end
+
+   }else{
+      
+         axios.get(
+            `https://api.mymemory.translated.net/get?q=${text}&langpair=${dataInfofrom}|${dataInfo}&key=49bada96bc7f6feeaef4`,
+         {headers: {
+            "Content-Type": "application/json",
+            },}
+         )
+         .then((response) => {
+            
+         //  console.log("Success:", response.data.responseData.translatedText);
+         console.log("Success:", response);
+         if(response.data.responseData.translatedText){
+            containercover.style.display = "flex"
+            containercover.style.flexDirection ="column"
+            contenttext.textContent = response.data.responseData.translatedText
+            console.log(csrfToken)
+                  axios.get(
+                     `${origin}/createauthuser`,
+
+                  {headers: {
+                     "X-CSRFToken":csrfToken,
+                     "Content-Type":"application/json",
+                     },}
+               )
+               .then((response) => {
+                     if(response.data.success){
+                        popup.style.display = "flex"
+                        popcontent.textContent = response.data.success
+                        
+                     }else{
+                        popup.style.display = "flex"
+                        popcontent.textContent = response.data.error
+                     }
+               })
+
+
+         }
+         })
+
+   }
+  })
+// the end
 }else{
  popup.style.display = 'flex'
   popcontent.textContent = 'please select and input the correct values'
@@ -196,6 +276,11 @@ closex.addEventListener("click", function(e){
    popup.style.display = 'none'
    popcontent.textContent = ''
 })
+
+
+
+// checkauth
+
 
 
 
