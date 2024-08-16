@@ -16,5 +16,6 @@ urlpatterns = [
     path("logout", views.logout, name="logout"),
     path("trash", views.trash, name="trash"),
     path("createtranword", views.createtranword, name="createtranword"),
-    path("createauthuser", views.createauthuser, name="createauthuser")
+    path("createauthuser", views.createauthuser, name="createauthuser"),
+    path("tranallwords/", views.tranallwords, name="tranallwords")
 ]

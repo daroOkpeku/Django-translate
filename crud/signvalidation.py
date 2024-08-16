@@ -8,9 +8,15 @@ def check_if_email_exist(value):
      else:
          return value
      
-def check_if_email_exist_login(value):
-     if User.objects.filter(email=value).exists():
-         raise value
+def check_if_email_exist_login(email):
+    try:
+        user = User.objects.get(email=email)
+        return user
+    except User.DoesNotExist:
+        raise ValueError("User does not exist")
+    except Exception as e:
+        raise ValueError(f"An unexpected error occurred: {str(e)}")
+
  
      
 

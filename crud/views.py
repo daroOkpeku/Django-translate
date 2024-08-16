@@ -85,10 +85,6 @@ def signin(request):
         if valid.is_valid():
             email = valid.cleaned_data.get("email", data['email'])
             password = valid.cleaned_data.get("password", data['password'])
-            # user = User.objects.filter(email=email).first()
-            # if user:
-            #     # model_to_dict method convert it to a dictionary
-            #     user_dict = model_to_dict(user)
             try:
                 user = User.objects.filter(email=email).get()
                
@@ -141,7 +137,7 @@ def trash(request):
           data = json.loads(request.body.decode("utf-8"))
           form = checkid(data)
           if form.is_valid():
-            idx = form.cleaned_data("id", data['id'])
+            idx = form.cleaned_data.get("id", data['id'])
             Translateword.objects.filter(id=idx, user=user.id).delete()
             return JsonResponse({"success":"successful delete"})
           else:
@@ -155,16 +151,28 @@ def trash(request):
       
 def tranallwords(request):
     if request.user.is_authenticated:
-      tran = Translateword.objects.all()   
-      paginate = Paginator(tran, 10)
-      page_num = request.GET.get('page')
-      try:
-          tran_paginate = paginate.page(page_num)
-      except PageNotAnInteger:  
-          tran_paginate = paginate.page(1)    
-      except EmptyPage:
-          tran_paginate = paginate.page(page_num)
-          return JsonResponse({"success":tran_paginate})
+        tran = Translateword.objects.all()
+        paginate = Paginator(tran, 10)
+        page_num = request.GET.get('page', 1)
+        
+        try:
+            tran_paginate = paginate.page(page_num)
+        except PageNotAnInteger:
+            tran_paginate = paginate.page(1)
+        except EmptyPage:
+            tran_paginate = paginate.page(paginate.num_pages)
+        
+        # Serialize the paginated data
+        tran_data = list(tran_paginate.object_list.values())
+        
+        return JsonResponse({
+            "success": True,
+            "data": tran_data,
+            "page": tran_paginate.number,
+            "total_pages": paginate.num_pages,
+        })
+    else:
+        return JsonResponse({"success": False, "error": "User not authenticated"})
       
       
       
