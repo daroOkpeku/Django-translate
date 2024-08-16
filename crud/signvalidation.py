@@ -76,7 +76,7 @@ class TransWordValidate(forms.Form):
         max_length=255,
         strip=True
     )
-    
+
     
 
 class unauthuer(forms.Form):

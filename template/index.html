@@ -14,7 +14,12 @@
 </head>
 <body>
   <section class="w-full relative ">
-    {% include 'component/heading.html' %}
+   {% if data %} 
+   {% include 'component/headingtwo.html' %}
+   {% else %}
+   {% include 'component/heading.html' %}
+   {% endif %}
+   
     <div class="w-full flex flex-row items-center h-[95vh] ">
      <section class="w-full sm:w-full md:w-1/2 lg:w-1/2 flex flex-col items-center justify-items-center  gap-5  ">
       <span class="w-full  flex items-center justify-items-center    ">
@@ -89,4 +94,5 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{% static 'app.js' %}?v={{ STATIC_VERSION }}"></script>
+
 </html>

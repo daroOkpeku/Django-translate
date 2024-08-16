@@ -12,6 +12,7 @@ let closex = document.querySelector(".close")
 let popup = document.querySelector(".popup")
 let popcontent = document.querySelector(".popcontent")
 let origin = window.location.origin
+let logout = document.querySelector(".logout")
 
 // https://www.flaticon.com/search?word=send
 
@@ -140,6 +141,7 @@ submit.addEventListener("click", function(e){
   let text = word.value
   let tox = to.value
   let fromx = from.value
+  localStorage.removeItem("transget")
   const selectedOption = to.options[to.selectedIndex]
   const dataInfo = selectedOption.dataset.id.toLowerCase();
 
@@ -280,7 +282,44 @@ closex.addEventListener("click", function(e){
 
 
 // checkauth
+let recentobj = localStorage.getItem("transget")?JSON.parse(localStorage.getItem("transget")):{}
+
+if(recentobj && Object.keys(recentobj).length > 0){
+   console.log(recentobj)
+ let fromlang =  countries.find((item)=>item.language.toLowerCase() == recentobj.fromx)
+ from.value = `${fromlang.country+'('+fromlang.code+')'}`
+
+ let tolang =  countries.find((item)=>item.language.toLowerCase() == recentobj.to)
+ to.value = `${tolang.country+'('+tolang.code+')'}`
+
+ word.value = `${recentobj.originword}`
+
+ containercover.style.display = "flex"
+ containercover.style.flexDirection ="column"
+ contenttext.textContent = recentobj.tranword
+}
 
 
 
-
+if(logout){
+   logout.addEventListener("click", function(e){
+      e.preventDefault()
+      localStorage.removeItem("transget")
+      axios.get(
+          `${origin}/logout`,
+        {headers: {
+          "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json",
+          },}
+      )
+      .then((response) => {
+            if(response.data.success){
+              popup.style.display = "flex"
+              popcontent.textContent = response.data.success
+              setTimeout(()=>{
+                      window.location.href = `${origin}`
+              },2000)
+            }
+      })
+  })
+}

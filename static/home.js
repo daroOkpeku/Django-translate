@@ -5,9 +5,12 @@ let popup = document.querySelector(".popup")
 let popcontent = document.querySelector(".popcontent")
 let trashx = document.querySelector(".trashx")
 let insidetable = document.querySelector(".insidetable")
+let buger = document.getElementById("buger")
+let listx =document.getElementById('list')
 console.log(insidetable)
 logout.addEventListener("click", function(e){
     e.preventDefault()
+    localStorage.removeItem("transget")
     axios.get(
         `${origin}/logout`,
       {headers: {
@@ -128,3 +131,13 @@ axios.get(
 .catch((error) => {
   console.error("Error:", error);
 });
+
+
+buger.addEventListener("click", function(e){
+  if(listx.style.display === 'block'){
+   listx.style.display = 'none';
+  }else{
+  listx.style.display = 'block';
+  }
+  listx.style.animation = 'yourAnimationName 2s ease-in-out';
+})

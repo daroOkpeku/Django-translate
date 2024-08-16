@@ -21,6 +21,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
+ if request.user.is_authenticated:
+    user = request.user
+    return render(request,"index.html",{"data":user})
+ else:
     return render(request,"index.html")
 
 
