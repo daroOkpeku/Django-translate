@@ -77,6 +77,7 @@ pip install -r requirements.txt
 # Collect static files into the staticfiles_build directory
 python manage.py collectstatic --noinput
 
+
 # List contents of the directory for debugging
 echo "Contents of staticfiles_build directory:"
 ls -l staticfiles_build
