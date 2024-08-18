@@ -72,7 +72,7 @@ source venv/bin/activate
 pip install --upgrade pip
 
 pip install -r requirements.txt
-python3 manage.py collectstatic --noinput
+python manage.py collectstatic --noinput 
 
 
 # List contents of the directory for debugging
