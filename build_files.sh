@@ -84,7 +84,7 @@ ls -l staticfiles
 
 
 echo "Deploying HTML files..."
-cp -R templates/* /path/to/deployment/templates/
+cp -R template/* /path/to/deployment/template/
 # or
 # cp -R static/* /path/to/deployment/static/
 
