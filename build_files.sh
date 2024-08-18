@@ -83,13 +83,20 @@ echo "Contents of staticfiles directory:"
 ls -l staticfiles
 
 
+# Step 6: Deploy HTML files
+DEPLOYMENT_DIR="./template"
+
 echo "Deploying HTML files..."
-cp -R template/* /path/to/deployment/template/
-# or
-# cp -R static/* /path/to/deployment/static/
+# Ensure the directory exists
+if [ ! -d "$DEPLOYMENT_DIR" ]; then
+  echo "Creating directory $DEPLOYMENT_DIR..."
+  mkdir -p "$DEPLOYMENT_DIR"
+fi
+
+# Copy the updated HTML files to the deployment directory
+cp -R templates/* "$DEPLOYMENT_DIR"
 
 # Step 7: Restart the Server (if needed)
-# This step depends on your hosting setup.
 echo "Restarting server..."
 service nginx restart  # or gunicorn, apache, etc.
 
