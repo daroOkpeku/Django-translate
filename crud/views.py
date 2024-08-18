@@ -155,7 +155,7 @@ def trash(request):
       
 def tranallwords(request):
     if request.user.is_authenticated:
-        tran = Translateword.objects.all()
+        tran = Translateword.objects.filter(user_id=request.user.id)
         paginate = Paginator(tran, 10)
         page_num = request.GET.get('page', 1)
         
