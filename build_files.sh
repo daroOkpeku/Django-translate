@@ -83,8 +83,3 @@ echo "Contents of staticfiles directory:"
 ls -l staticfiles
 
 
-# Step 6: Restart the Server (if needed)
-echo "Restarting server..."
-service nginx restart  # or gunicorn, apache, etc.
-
-echo "Build and deployment process completed!"
