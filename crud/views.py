@@ -75,7 +75,7 @@ def register(request):
            profile = Profile(fullname=fullname, user=user, code=randomcode)
            profile.save()
            send_welcome_email(fullname, email, originurl, randomcode)
-           return JsonResponse({'data':'successful registered your account'})
+           return JsonResponse({'data':'successful registered your account, please check your email'})
         else:
             return JsonResponse({"error": "failed"})
 
