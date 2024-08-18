@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+import psycopg2
+from urllib.parse import urlparse
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +28,7 @@ SECRET_KEY = 'django-insecure-6+o65o@j(9y&ah6uxwj8^ue)3qur1+wh-3l^o6!-^tmw&d3-(h
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# '.vercel.com', '127.0.0.1'
 ALLOWED_HOSTS = ['.vercel.com', '127.0.0.1']
 
 
@@ -82,39 +86,53 @@ WSGI_APPLICATION = 'my_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-#     hostname = "b8r.h.filess.io"
-# database
-#  = "translate_impossible"
-# port = "3305"
-# username = "translate_impossible"
-# password
-#  = "d175a408ad1c484446c33f6ed5758b438fada512"
+# DATABASES = {
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': BASE_DIR / 'db.sqlite3',
+#     # }
+# # hostname = "osm.h.filess.io"
+# # database
+# #  = "translate_slowlyseen"
+# # port = "5432"
+# # username = "translate_slowlyseen"
+# # password
+# #  = "f8e5a21671d821684316d0f7e61ec1366a729750"
     
-     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'translate',
-        # 'USER': 'root',
-        # 'PASSWORD': '',
-        # 'HOST':'127.0.0.1',
-        # 'PORT':'3306',
-        'NAME': 'translate_impossible',
-        'USER': 'translate_impossible',
-        'PASSWORD': 'd175a408ad1c484446c33f6ed5758b438fada512',
-        'HOST':'b8r.h.filess.io',
-        'PORT':'3305',
-        
-         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'",
-        },
+#      'default': {
+#         # 'ENGINE': 'django.db.backends.mysql',
+#         # 'NAME': 'translate',
+#         # 'USER': 'root',
+#         # 'PASSWORD': '',
+#         # 'HOST':'127.0.0.1',
+#         # 'PORT':'3306',
+      
+#         #  'OPTIONS': {
+#         #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'",
+#         # },
+#     }
+# }
+
+
+
+
+# DATABASE_URL = os.environ.get('',None)
+db_info = urlparse('postgresql://postgres:jUQtrRHGpxuqpbcKoMpIAwVNqbMCdmhw@autorack.proxy.rlwy.net:34238/railway')
+DATABASES = {
+        "default": {
+            "ENGINE": 'django.db.backends.postgresql_psycopg2',
+            "NAME": db_info.path[1:],
+            "USER": db_info.username,
+            "PASSWORD": db_info.password,
+            "HOST": db_info.hostname,
+            "PORT": db_info.port,
+            "OPTIONS": {
+                "sslmode": "disable",
+                        },
+            "CONN_MAX_AGE": 60,
+        }
     }
-}
-
-
+    
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -151,6 +169,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
