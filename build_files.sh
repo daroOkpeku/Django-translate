@@ -81,3 +81,16 @@ python manage.py collectstatic --noinput
 # List contents of the directory for debugging
 echo "Contents of staticfiles directory:"
 ls -l staticfiles
+
+
+echo "Deploying HTML files..."
+cp -R templates/* /path/to/deployment/templates/
+# or
+# cp -R static/* /path/to/deployment/static/
+
+# Step 7: Restart the Server (if needed)
+# This step depends on your hosting setup.
+echo "Restarting server..."
+service nginx restart  # or gunicorn, apache, etc.
+
+echo "Build and deployment process completed!"
