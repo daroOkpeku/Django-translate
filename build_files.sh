@@ -71,11 +71,8 @@ source venv/bin/activate
 # Upgrade pip in the virtual environment
 pip install --upgrade pip
 
-# Install dependencies
 pip install -r requirements.txt
-
-# Collect static files into the staticfiles_build directory
-python manage.py collectstatic --noinput
+python3.9 manage.py collectstatic --noinput
 
 
 # List contents of the directory for debugging
