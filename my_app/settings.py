@@ -171,7 +171,7 @@ USE_TZ = True
 # STATICFILES_DIRS = [BASE_DIR/'static']
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
 
-STATIC_URL = '/static/'
+STATIC_URL = 'https://ik.imagekit.io/ca4ajrkzu/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 

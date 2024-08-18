@@ -79,4 +79,12 @@ python manage.py collectstatic --noinput
 echo "Contents of staticfiles directory:"
 ls -l staticfiles
 
+# Check if the staticfiles_build directory exists and contains files
+if [ -d "staticfiles" ]; then
+    echo "Static files collected successfully."
+else
+    echo "Static files were not collected properly."
+    exit 1
+fi
+
 
