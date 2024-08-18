@@ -79,5 +79,5 @@ python manage.py collectstatic --noinput
 
 
 # List contents of the directory for debugging
-echo "Contents of staticfiles_build directory:"
-ls -l staticfiles_build
+echo "Contents of staticfiles directory:"
+ls -l staticfiles
