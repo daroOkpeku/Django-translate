@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import psycopg2
+# import psycopg2
 from urllib.parse import urlparse
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6+o65o@j(9y&ah6uxwj8^ue)3qur1+wh-3l^o6!-^tmw&d3-(h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # '.vercel.com', '127.0.0.1'
 ALLOWED_HOSTS = ['*']
 
@@ -116,7 +117,7 @@ WSGI_APPLICATION = 'my_app.wsgi.application'
 
 
 
-# DATABASE_URL = os.environ.get('',None)
+DATABASE_URL = os.environ.get('',None)
 db_info = urlparse('postgresql://postgres:jUQtrRHGpxuqpbcKoMpIAwVNqbMCdmhw@autorack.proxy.rlwy.net:34238/railway')
 DATABASES = {
         "default": {
@@ -132,6 +133,25 @@ DATABASES = {
             "CONN_MAX_AGE": 60,
         }
     }
+
+
+
+
+# DATABASES = {
+    
+#      'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'translate',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST':'127.0.0.1',
+#         'PORT':'3306',
+        
+#          'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'",
+#         },
+#     }
+# }
     
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -168,9 +188,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # STATIC_URL = '/static/'
-# STATICFILES_DIRS = [BASE_DIR/'static']
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
-
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",  # If you have a global static directory
+# ]
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+# ca4ajrkzu
 STATIC_URL = 'https://ik.imagekit.io/ca4ajrkzu/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
