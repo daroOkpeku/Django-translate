@@ -143,7 +143,7 @@ def trash(request):
           if form.is_valid():
             idx = form.cleaned_data.get("id", data['id'])
             Translateword.objects.filter(id=idx, user=user.id).delete()
-            return JsonResponse({"success":"successful delete"})
+            return JsonResponse({"success":"successfully deleted"})
           else:
             return JsonResponse({"error":"please enter the correct input "}) 
       else:
@@ -238,7 +238,7 @@ def createauthuser(request):
                 userauth.save()
                 return JsonResponse({'success': "successful"})
             elif int(userauth.times_used) == 30:
-                return JsonResponse({'error': "please login to translate more"})
+                return JsonResponse({'error': "please login to do more translation"})
         else:
             # If userauth is None, create a new Authuser entry
             qury = Authuser(ip=userip, times_used=1)
