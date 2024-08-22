@@ -204,7 +204,7 @@ def createtranword(request):
                 query = Translateword(fromx=fromx, to=tox, tranword=tranword, originword=originword, user=user)
                 query.save()
 
-                return JsonResponse({'success': "Translation word successfully created."}, status=201)
+                return JsonResponse({'success': "Translation Saved Successfully."}, status=201)
             else:
                 return JsonResponse({"error": "Invalid input. Please check the data and try again.", "details": form.errors}, status=400)
         else:
