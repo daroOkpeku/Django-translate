@@ -115,7 +115,7 @@ WSGI_APPLICATION = 'my_app.wsgi.application'
 # }
 
 
-
+# db_info = urlparse('postgresql://ibrahim:qe9ZrRQ7z4UQcL18fIfYHWZnFbqdVrcJ@dpg-cre9o9lsvqrc73fh2ae0-a.frankfurt-postgres.render.com/foodie_deliver')
 
 DATABASE_URL = os.environ.get('',None)
 db_info = urlparse('postgresql://postgres:jUQtrRHGpxuqpbcKoMpIAwVNqbMCdmhw@autorack.proxy.rlwy.net:34238/railway')
@@ -133,6 +133,7 @@ DATABASES = {
             "CONN_MAX_AGE": 60,
         }
     }
+
 
 
 
